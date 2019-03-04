@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { parseStringToNote } from '../helpers/Note';
+import Note from '../helpers/Note';
 
 export class NoteForm extends Component {
   constructor() {
@@ -26,9 +26,8 @@ export class NoteForm extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    console.log(
-      parseStringToNote(this.state.raw).dateScheduled.format('MMMM Do YYYY')
-    );
+    const note = new Note(this.state.raw);
+    console.log(note);
   };
 
   render() {
