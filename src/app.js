@@ -9,6 +9,20 @@ import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
 import { firebase } from './firebase/firebase';
 import LoadingPage from './components/LoadingPage';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import {
+  faPlus, faLightbulb, faExclamation, faCheck, faQuestion
+} from '@fortawesome/free-solid-svg-icons';
+
+library.add(
+  fab,
+  faPlus,
+  faLightbulb,
+  faExclamation,
+  faCheck,
+  faQuestion
+);
 
 const store = configureStore();
 const jsx = (

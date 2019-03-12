@@ -1,0 +1,23 @@
+.button {
+  background-color: $color-primary;
+  color: $color-white;
+  padding: 1.5rem 3rem;
+  width: 100%;
+  border: none;
+}
+
+textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid $color-primary;
+  background-color: $color-white;
+  padding: 1rem;
+  outline: none;
+  transition: all .3s ease;
+  resize: none;
+  overflow: hidden;
+
+  &:active, &:focus {
+    border-width: 2px;
+  }
+}

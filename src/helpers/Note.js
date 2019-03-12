@@ -1,4 +1,6 @@
+import React from 'react';
 import moment from 'moment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const enders = ['!', '*', '?', '|'];
 
@@ -58,15 +60,24 @@ export default class Note {
 
     switch (endsIn) {
       case '!':
-        return 'Important';
+        this.setType('Important');
+        break;
       case '?':
-        return 'Question';
+        this.setType('Question');
+        break;
+
       case '*':
-        return 'Idea';
+        this.setType('Idea');
+        break;
+
       case '|':
-        return 'Todo';
+        this.setType('Todo');
+        break;
+
       default:
-        return 'Note';
+        this.setType('Default');
+        break;
+
     }
   };
 
@@ -77,7 +88,6 @@ export default class Note {
     const length =
       this.raw.length - (this.raw.length - lastEnderIndex + 1 + firstComma);
 
-    console.log(firstComma, lastEnderIndex, length, this.raw.length);
     this.text = this.raw.substr(firstComma + 1, length).trim(); // Everything after the first comma
   };
 
@@ -135,4 +145,34 @@ export default class Note {
         return moment();
     }
   };
+}
+
+export const noteIconByType = (note) => {
+  let icon = '';
+
+  switch (note.type) {
+    case 'Idea':
+      icon = 'lightbulb';
+      break;
+    case 'Question':
+      icon = 'question';
+      break;
+    case 'Important':
+      icon = 'exclamation';
+      break;
+    case 'Todo':
+      icon = 'check';
+      break;
+    default:
+      icon = '';
+      break;
+  }
+
+  if (icon.length) {
+    return (
+      <FontAwesomeIcon icon={icon} />
+    )
+  } else {
+    return (<span></span>);
+  }
 }

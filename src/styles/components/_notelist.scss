@@ -1,0 +1,22 @@
+.note {
+  display: grid;
+  padding: 0!important;
+  grid-template-columns: 3rem auto 5rem;
+
+  .type {
+    text-align: center;
+  }
+
+  .content {
+    padding: 1rem;
+
+    .title {
+      font-weight: bold;
+    }
+  }
+
+  .actions {
+    text-align: center;
+  }
+}
+

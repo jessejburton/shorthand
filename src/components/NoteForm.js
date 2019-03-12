@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Note from '../helpers/Note';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { startAddNote } from '../actions/notes';
 
 export class NoteForm extends Component {
   constructor() {
@@ -18,6 +20,12 @@ export class NoteForm extends Component {
   }
 
   onNoteChange = (e) => {
+
+    // Resize textarea if needed
+    const textarea = e.target;
+    textarea.style.cssText = 'height:auto;';
+    textarea.style.cssText = 'height:' + textarea.scrollHeight + 'px';
+
     this.setState({
       raw: e.target.value
     });
@@ -27,20 +35,25 @@ export class NoteForm extends Component {
     e.preventDefault();
 
     const note = new Note(this.state.raw);
-    console.log(note);
+    this.props.startAddNote(note);
   };
 
   render() {
     return (
-      <form onSubmit={this.onSubmit} className="form">
-        <textarea
-          placeholder="Write something..."
-          className="textarea"
-          value={this.state.raw}
-          onChange={this.onNoteChange}
-        />
+      <form onSubmit={this.onSubmit} className="note-form">
+        <div className="input-field">
+          <textarea
+            placeholder="Write something..."
+            className="textarea"
+            value={this.state.raw}
+            onChange={this.onNoteChange}
+            id="note"
+            data-length="500"
+          />
+          <label htmlFor="note">Try ending a note with ! to mark it as important</label>
+        </div>
         <div>
-          <button className="button">Record Note</button>
+          <button className="button"><FontAwesomeIcon icon="plus" /> Add Note</button>
         </div>
       </form>
     );

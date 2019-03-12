@@ -1,0 +1,49 @@
+.notes {
+  list-style: none;
+  padding: 0;
+}
+
+.idea {
+  border: 1px solid #b49d1f!important;
+}
+
+.important {
+  border: 1px solid #b11403!important;
+}
+
+.todo {
+  border: 1px solid #545fbe!important;
+}
+
+.default {
+  border: 1px solid $color-black!important;
+}
+
+.question {
+  border: 1px solid $color-black!important;
+}
+
+.idea-filled {
+  color: $color-white!important;
+  background-color: #b49d1f!important;
+}
+
+.important-filled {
+  color: $color-white!important;
+  background-color: #b11403!important;
+}
+
+.todo-filled {
+  color: $color-white!important;
+  background-color: #545fbe!important;
+}
+
+.default-filled {
+  color: $color-white!important;
+  background-color: $color-black!important;
+}
+
+.question-filled {
+  color: $color-white!important;
+  background-color: $color-black!important;
+}
