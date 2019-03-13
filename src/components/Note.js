@@ -51,7 +51,7 @@ export default class Note {
       category = this.raw.substr(0, firstComma); // Everything before the first comma
     }
     // TODO add a buffer on this, i.e. if the comma is more than 3 words in then prompt isCategory?
-    this.setCategory(category);
+    this.setCategory(category.trim());
   };
 
   parseType = () => {
@@ -85,10 +85,17 @@ export default class Note {
     // get everything between the first comma and the last ender
     let firstComma = this.raw.indexOf(',');
     const lastEnderIndex = this.getLastEnderIndex();
-    const length =
-      this.raw.length - (this.raw.length - lastEnderIndex + 1 + firstComma);
 
-    this.text = this.raw.substr(firstComma + 1, length).trim(); // Everything after the first comma
+    if (lastEnderIndex == -1) {
+      this.setText(this.raw.substr(firstComma + 1, this.raw.length).trim());
+    } else {
+      const length =
+        this.raw.length - (this.raw.length - lastEnderIndex + 1 + firstComma);
+
+      this.setText(this.raw.substr(firstComma + 1, length).trim()); // Everything after the first comma
+    }
+
+
   };
 
   parseDateScheduled = () => {
