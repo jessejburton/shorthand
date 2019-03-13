@@ -83,7 +83,7 @@ export default class Note {
 
   parseText = () => {
     // get everything between the first comma and the last ender
-    const firstComma = this.raw.indexOf(',');
+    let firstComma = this.raw.indexOf(',');
     const lastEnderIndex = this.getLastEnderIndex();
     const length =
       this.raw.length - (this.raw.length - lastEnderIndex + 1 + firstComma);
@@ -94,11 +94,12 @@ export default class Note {
   parseDateScheduled = () => {
     // Find out if the note ends in an ender and a number.
     let dateScheduled = null;
-    let pattern = new RegExp(`([${enders.join('')}] [0-9]+)$`);
+    let pattern = new RegExp(`([${enders.join('')} ][0-9]+)$`);
 
     if (this.raw.match(pattern)) {
-      const number = this.raw.substr(this.raw.lastIndexOf(' ') + 1);
-      dateScheduled = this.numberToDate(number);
+      const index = this.raw.match(pattern).index;
+      const number = this.raw.substr(index, 10).trim();
+      dateScheduled = numberToDate(number);
     }
 
     this.dateScheduled = dateScheduled;
@@ -116,35 +117,6 @@ export default class Note {
     return index;
   };
 
-  numberToDate = (number) => {
-    const currentMonth = moment().format('MM');
-    const currentYear = moment().format('YYYY');
-    const str = number.toString();
-
-    switch (str.length) {
-      case 1:
-        return moment(`${currentMonth}0${str}${currentYear}`, 'MMDDYYYY');
-      case 2:
-        return moment(`${currentMonth}${str}${currentYear}`, 'MMDDYYYY');
-      case 4:
-        return moment(
-          `${str.substr(0, 2)}${str.substr(2, 3)}${currentYear}`,
-          'MMDDYYYY'
-        );
-      case 6:
-        return moment(
-          `${str.substr(0, 2)}${str.substr(2, 2)}${'20' + str.substr(4, 5)}`,
-          'MMDDYYYY'
-        );
-      case 8:
-        return moment(
-          `${str.substr(0, 2)}${str.substr(2, 2)}${str.substr(4, 7)}`,
-          'MMDDYYYY'
-        );
-      default:
-        return moment();
-    }
-  };
 }
 
 export const noteIconByType = (note) => {
@@ -176,3 +148,32 @@ export const noteIconByType = (note) => {
     return (<span></span>);
   }
 }
+
+export const numberToDate = (number) => {
+  const currentMonth = moment().format('MM');
+  const currentYear = moment().format('YYYY');
+  const str = number.toString();
+  let dateString = "";
+
+  switch (str.length) {
+    case 1:
+      dateString = `${currentYear}-${currentMonth}-0${str}`;
+      break;
+    case 2:
+      dateString = `${currentYear}-${currentMonth}-${str}`;
+      break;
+    case 4:
+      dateString = `${currentYear}-${str.substr(0, 2)}-${str.substr(2, 2)}`;
+      break;
+    case 6:
+      dateString = `${'20' + str.substr(4, 2)}-${str.substr(0, 2)}-${str.substr(2, 2)}`;
+      break;
+    case 8:
+      dateString = `${str.substr(4, 4)}-${str.substr(0, 2)}-${str.substr(2, 2)}`;
+      break;
+    default:
+      return null;
+  }
+
+  return moment(dateString).format("MM-DD-YYYY");
+};

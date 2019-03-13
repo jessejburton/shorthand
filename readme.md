@@ -23,10 +23,9 @@ By default there are several conventions to help you organize your content.
 
 - Each note will be time stamped when it is entered
 - If a note is typed as a todo you can enter a date after to schedule that todo. You can enter a date as either 2, 4, 6, 8 numbers.
+  - 1 number uses the format d and defaults to the current month
   - 2 numbers uses format dd and defaults to the current month
-  - 3 numbers uses format mdd
   - 4 numbers uses format mmdd and will default to the current year
-  - 5 numbers uses format mdyy
   - 6 numbers uses format mmddyy and will default to 20yy
   - 8 numbers uses format mmddyyyy
 
@@ -44,5 +43,6 @@ run `npm run dev' to deploy the app in development mode.
 
 # IDEAS
 
-- random placeholder text in new note form
+- random placeholder text in new note form (Write something... What do you want to record? etc.)
 - sub-categories based on multiple commas or >
+-

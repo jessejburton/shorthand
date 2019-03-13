@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Note from '../helpers/Note';
+import Note from './Note';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { startAddNote } from '../actions/notes';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { noteIconByType } from '../helpers/Note';
+import { noteIconByType } from './Note';
 
 export const NoteList = (props) => (
   <div>
