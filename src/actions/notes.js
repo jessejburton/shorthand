@@ -1,4 +1,3 @@
-import database from '../firebase/firebase';
 import uuid from 'uuid';
 
 // ADD_NOTE
