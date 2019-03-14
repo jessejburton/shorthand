@@ -1,6 +1,11 @@
 {
   "name": "boilerplate-react-app",
   "version": "1.0.0",
+  "engines": {
+    "node": "8.11.1",
+    "npm": "5.6.0",
+    "yarn": "1.14.0"
+  },
   "main": "index.js",
   "author": "Jesse Burton",
   "license": "MIT",
