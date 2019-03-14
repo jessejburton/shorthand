@@ -41,8 +41,10 @@ run `npm install` in a terminal window.
 
 run `npm run dev' to deploy the app in development mode.
 
-# IDEAS
+# TODO/IDEAS
 
 - random placeholder text in new note form (Write something... What do you want to record? etc.)
 - sub-categories based on multiple commas or >
--
+- Add a "press enter to submit" checkbox for adding multiple short notes.
+- Add a list mode, where every item gets added to a list within the category specified (or not) in the first item.
+- let actions follow along as you scroll. Basically fix them to the top of the scroll for long notes.

@@ -1,31 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
-import { noteIconByType } from './Note';
+import NoteListItem from './NoteListItem';
 
-export const NoteList = (props) => (
-  <div>
-    <ul className="notes">
-      {props.notes.map((note) => {
-        return (
-          <li className={`note ${note.type.toLowerCase()}`} key={note.id}>
-            <div className={`type ${note.type.toLowerCase()}-filled`}>{noteIconByType(note)}</div>
-            <div className="content">
-              <span className="title">{note.category}</span>
-              <p>{note.text}</p>
-            </div>
-            <div className="acions">
-              <label htmlFor={note.id}>
-                <input id={note.id} className="filled-in" type="checkbox" />
-                <span></span>
-              </label>
-            </div>
-          </li>
-        );
-      })}
-    </ul>
-  </div>
-)
+export const NoteList = (props) => {
+  let iteration = 0;
+
+  return (
+    <div>
+      <ul className="notes">
+        {props.notes.map((note) => {
+          iteration++;
+          const className = iteration % 2 ? 'odd' : 'even';
+          return (
+            <NoteListItem note={note} key={note.id} itemClass={className} />
+          );
+        })}
+      </ul>
+    </div>
+  )
+};
 
 const mapStateToProps = (state) => {
   return {

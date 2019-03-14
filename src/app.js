@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import AppRouter, { history } from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import { login, logout } from './actions/auth';
+import { startSetNotes } from './actions/notes';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
@@ -12,7 +13,7 @@ import LoadingPage from './components/LoadingPage';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import {
-  faPlus, faLightbulb, faExclamation, faCheck, faQuestion
+  faPlus, faLightbulb, faExclamation, faCheckSquare, faQuestion, faEdit, faSquare
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -20,8 +21,10 @@ library.add(
   faPlus,
   faLightbulb,
   faExclamation,
-  faCheck,
-  faQuestion
+  faCheckSquare,
+  faQuestion,
+  faEdit,
+  faSquare
 );
 
 const store = configureStore();
@@ -42,4 +45,6 @@ const renderApp = () => {
 ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
 // setTimeout(renderApp, 3000); // test loading
-renderApp();
+store.dispatch(startSetNotes()).then(() => {
+  renderApp();
+});

@@ -5,7 +5,10 @@
 @import './base/variables';
 @import './base/base';
 
+@import './components/button';
 @import './components/notes';
 @import './components/noteform';
 @import './components/notelist';
 
+@import './layout/header';
+@import './layout/container';

@@ -1,0 +1,12 @@
+.button {
+  background-color: $color-secondary;
+  color: $color-white;
+  padding: 1.5rem 3rem;
+  width: 100%;
+  border: none;
+  transition: all .3s ease;
+
+  &:hover {
+    background-color: darken($color-secondary, 10%);
+  }
+}

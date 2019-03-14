@@ -4,46 +4,68 @@
 }
 
 .idea {
-  border: 1px solid #b49d1f!important;
+  border-color: $color-idea!important;
 }
 
 .important {
-  border: 1px solid #b11403!important;
+  border-color: $color-important!important;
 }
 
 .todo {
-  border: 1px solid #545fbe!important;
+  border-color: $color-todo!important;
 }
 
 .default {
-  border: 1px solid $color-black!important;
+  border-color: $color-default!important;
 }
 
 .question {
-  border: 1px solid $color-black!important;
+  border-color: $color-question!important;
 }
 
 .idea-filled {
   color: $color-white!important;
-  background-color: #b49d1f!important;
+  background-color: $color-idea!important;
 }
 
 .important-filled {
   color: $color-white!important;
-  background-color: #b11403!important;
+  background-color: $color-important!important;
 }
 
 .todo-filled {
   color: $color-white!important;
-  background-color: #545fbe!important;
+  background-color: $color-todo!important;
 }
 
 .default-filled {
   color: $color-white!important;
-  background-color: $color-black!important;
+  background-color: $color-default!important;
 }
 
 .question-filled {
   color: $color-white!important;
-  background-color: $color-black!important;
+  background-color: $color-question!important;
+}
+
+.odd {
+  .idea-filled {
+    background-color: darken($color-idea, 5%)!important;
+  }
+
+  .important-filled {
+    background-color: darken($color-important, 5%)!important;
+  }
+
+  .todo-filled {
+    background-color: darken($color-todo, 5%)!important;
+  }
+
+  .default-filled {
+    background-color: darken($color-default, 5%)!important;
+  }
+
+  .question-filled {
+    background-color: darken($color-question, 5%)!important;
+  }
 }

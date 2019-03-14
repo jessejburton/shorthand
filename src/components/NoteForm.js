@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { startAddNote } from '../actions/notes';
 
 export class NoteForm extends Component {
+
   constructor() {
     super();
 
@@ -17,6 +18,14 @@ export class NoteForm extends Component {
       type: '',
       endsIn: ''
     };
+  }
+
+  componentDidMount() {
+    this.noteTextarea.focus();
+  }
+
+  componentDidUpdate() {
+    this.noteTextarea.focus();
   }
 
   onNoteChange = (e) => {
@@ -33,9 +42,14 @@ export class NoteForm extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
+    const noteTextarea = document.getElementById("note");
 
-    const note = new Note(this.state.raw);
-    this.props.startAddNote(note);
+    if (this.state.raw.length > 5) {
+      const note = new Note(this.state.raw);
+      this.props.startAddNote(note);
+      this.setState({ raw: '' })
+      noteTextarea.focus();
+    }
   };
 
   render() {
@@ -43,6 +57,7 @@ export class NoteForm extends Component {
       <form onSubmit={this.onSubmit} className="note-form">
         <div className="input-field">
           <textarea
+            ref={(input) => { this.noteTextarea = input; }}
             placeholder="Write something..."
             className="textarea"
             value={this.state.raw}
@@ -50,7 +65,7 @@ export class NoteForm extends Component {
             id="note"
             data-length="500"
           />
-          <label htmlFor="note">Try ending a note with ! to mark it as important</label>
+          <label htmlFor="note" className="textarea-label">Try ending a note with ! to mark it as important</label>
         </div>
         <div>
           <button className="button"><FontAwesomeIcon icon="plus" /> Add Note</button>

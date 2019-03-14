@@ -1,22 +1,82 @@
 .note {
   display: grid;
   padding: 0!important;
-  grid-template-columns: 3rem auto 5rem;
+  grid-template-columns: .5rem auto 5rem;
+  margin-bottom: 0rem;
+  transition: all .3s ease;
+  border-bottom-left-radius: $rounded;
+  border-top-right-radius: $rounded;
+  background-color: darken($color-white, 2%);
 
-  .type {
-    text-align: center;
+  &.odd {
+    background-color: darken($color-white, 4%);
   }
 
-  .content {
-    padding: 1rem;
+  .type{
+    border-bottom-left-radius: $rounded;
+  }
 
-    .title {
-      font-weight: bold;
+  .text {
+    color: $color-font;
+    padding: 0 $m-size $m-size $m-size;
+    border-bottom-left-radius: $rounded;
+  }
+
+  .scheduled {
+    padding-right: $m-size;
+  }
+
+  .category {
+    text-align: right;
+    color: $color-font-light;
+    padding: .3rem $m-size 0 $m-size;
+    font-size: $s-size;
+
+    &-helper {
+      padding-top: $s-size;
+      display: flex;
+      justify-content: space-between;
     }
   }
 
+  .content {
+  }
+
   .actions {
+    display: flex;
+    flex-direction: column;
     text-align: center;
+
+    & > div {
+      height: 4.4rem;
+      padding: 1rem 0;
+    }
+  }
+
+  .date {
+    font-style: italic;
+    font-weight: 300;
+    font-size: $s-size;
+  }
+
+  .note-status {
+
+    & + .boxes .checked {
+      display: none;
+    }
+
+    & + .boxes .unchecked {
+      display: block;
+    }
+
+    &:checked + .boxes .checked {
+      display: block;
+    }
+
+    &:checked + .boxes .unchecked {
+      display: none;
+    }
+
   }
 }
 

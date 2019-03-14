@@ -19,13 +19,20 @@ export const startAddNote = (noteData = {}) => {
       dateScheduled = 0,
       type = ''
     } = noteData;
-    const note = { raw, dateEntered, category, text, dateScheduled, type };
+    const id = uuid.v4();
+    const note = { id, raw, dateEntered, category, text, dateScheduled, type };
 
-    console.log(note);
+    /* LOCALSTORAGE . start */
+    const notes = [
+      note,
+      ...getState().notes
+    ]
+
+    localStorage.setItem('notes', JSON.stringify(notes));
+    /* LOCALSTORAGE . end */
 
     dispatch(
       addNote({
-        id: uuid.v4(),
         ...note
       })
     );
@@ -83,16 +90,20 @@ export const startEditExpense = (id, updates) => {
   };
 };
 
-// SET_EXPENSES
-export const setExpenses = (expenses) => ({
-  type: 'SET_EXPENSES',
-  expenses
+// SET_NOTES
+export const setNotes = (notes) => ({
+  type: 'SET_NOTES',
+  notes
 });
 
-export const startSetExpenses = () => {
+export const startSetNotes = () => {
   return (dispatch, getState) => {
-    const uid = getState().auth.uid;
+    // TODO authorization -- const uid = getState().auth.uid;
+    const notes = JSON.parse(localStorage.getItem("notes")) || [];
 
+    return Promise.resolve(dispatch(setNotes(notes)));
+
+    /* // TODO Database
     return database
       .ref(`users/${uid}/expenses`)
       .once('value')
@@ -108,5 +119,6 @@ export const startSetExpenses = () => {
 
         dispatch(setExpenses(expenses));
       });
+    */
   };
 };

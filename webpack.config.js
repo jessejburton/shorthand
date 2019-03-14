@@ -51,6 +51,10 @@ module.exports = (env) => {
               }
             ]
           })
+        },
+        {
+          test: /\.(jpe?g|png|gif|svg)$/i,
+          loader: 'file-loader?name=/images/[name].[ext]'
         }
       ]
     },

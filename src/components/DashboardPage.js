@@ -5,7 +5,7 @@ import NoteList from './NoteList';
 const DashboardPage = (props) => (
   <div>
     <NoteForm />
-    <h2>Recent Notes</h2>
+    <h2 className="logo-font">Notes</h2>
     <NoteList />
   </div>
 );
