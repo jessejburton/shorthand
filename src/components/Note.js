@@ -7,7 +7,7 @@ const enders = ['!', '*', '?', '|'];
 export default class Note {
   constructor(raw) {
     this.raw = raw.trim();
-    this.dateEntered = moment();
+    this.dateEntered = moment().format("MM/DD/YYYY");
     this.category = '';
     this.text = '';
     this.dateScheduled = null;

@@ -1,3 +1,4 @@
+import database from '../firebase/firebase';
 import uuid from 'uuid';
 
 // ADD_NOTE
@@ -8,7 +9,7 @@ export const addNote = (note) => ({
 
 export const startAddNote = (noteData = {}) => {
   return (dispatch, getState) => {
-    //const uid = getState().auth.uid;
+    const uid = getState().auth.uid;
 
     const {
       raw = '',
@@ -30,25 +31,18 @@ export const startAddNote = (noteData = {}) => {
     localStorage.setItem('notes', JSON.stringify(notes));
     /* LOCALSTORAGE . end */
 
-    dispatch(
-      addNote({
-        ...note
-      })
-    );
-
-    /*
+    // Add to the database
     return database
-      .ref(`users/${uid}/expenses`)
-      .push(expense)
-      .then((ref) => {
-        dispatch(
-          addExpense({
-            id: ref.key,
-            ...expense
+      .ref(`notes/${uid}`)
+      .push(note)
+      .then(() => {
+        return dispatch(
+          addNote({
+            ...note
           })
         );
       });
-      */
+
   };
 };
 
@@ -97,27 +91,28 @@ export const setNotes = (notes) => ({
 
 export const startSetNotes = () => {
   return (dispatch, getState) => {
-    // TODO authorization -- const uid = getState().auth.uid;
-    const notes = JSON.parse(localStorage.getItem("notes")) || [];
+    const uid = getState().auth.uid;
 
-    return Promise.resolve(dispatch(setNotes(notes)));
+    //const notes = JSON.parse(localStorage.getItem("notes")) || [];
 
-    /* // TODO Database
+    //return Promise.resolve(dispatch(setNotes(notes)));
+
     return database
-      .ref(`users/${uid}/expenses`)
+      .ref(`notes/${uid}`)
       .once('value')
       .then((snapshot) => {
-        const expenses = [];
+        const notes = [];
 
         snapshot.forEach((childSnapshot) => {
-          expenses.push({
+          notes.push({
             id: childSnapshot.key,
             ...childSnapshot.val()
           });
         });
 
-        dispatch(setExpenses(expenses));
+        console.log(notes);
+
+        dispatch(setNotes(notes));
       });
-    */
   };
 };

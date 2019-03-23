@@ -12,10 +12,10 @@ export default function NoteListItem(props) {
       <div className="content">
         <div className={`category-helper ${note.type.toLowerCase()}`}>
           <div className="category">
-            {note.category.length > 0 ? <strong>{note.category} ~ </strong> : <span></span>}<span className="date">{moment(note.dateEntered).format("MMM Do, YYYY @ hh:mma")}</span>
+            {note.category.length > 0 ? <strong>{note.category} ~ </strong> : <span></span>}<span className="date">{moment(note.dateEntered).format("MM/DD/YY @ hh:mma")}</span>
           </div>
           <div className="scheduled">
-            {note.dateScheduled !== null ? <span className="date">SCHEDULED: {moment(note.dateScheduled).format("MMM Do, YYYY")}</span> : <span></span>}
+            {note.dateScheduled !== null ? <span className="date">{moment(note.dateScheduled).format("MMM Do, YYYY")}</span> : <span></span>}
           </div>
         </div>
         <div className={`text-helper ${note.type.toLowerCase()}`}>

@@ -7,7 +7,9 @@ import { startSetNotes } from './actions/notes';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
-import LoadingPage from './components/LoadingPage';
+import firebase from 'firebase';
+import { login, logout } from './actions/auth';
+import LoadingPage from './components/pages/LoadingPage';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import {
@@ -42,7 +44,30 @@ const renderApp = () => {
 
 ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
-// setTimeout(renderApp, 3000); // test loading
-store.dispatch(startSetNotes()).then(() => {
-  renderApp();
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    // Destructure the User
+    const {
+      uid,
+      displayName = '',
+      email = '',
+      photoURL = ''
+    } = user;
+
+    // Log the user in and get the necessary data
+    Promise.all([
+      store.dispatch(login({ uid, displayName, email, photoURL })),
+      store.dispatch(startSetNotes())
+    ]).then(() => {
+      renderApp();
+      if (history.location.pathname === '/') {
+        history.push('/notes');
+      }
+    });
+  } else {
+    store.dispatch(logout());
+    renderApp();
+    history.push('/');
+  }
 });
+

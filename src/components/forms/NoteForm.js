@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Note from './Note';
+import Note from '../Note';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { startAddNote } from '../actions/notes';
+import { startAddNote } from '../../actions/notes';
 
 export class NoteForm extends Component {
 
